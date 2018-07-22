@@ -5,21 +5,24 @@ if(is_array($_GET)&&count($_GET)>0)
     if(isset($_GET["replyTo"]))
     {
         $ac = $_GET["replyTo"];
-        }
-} ?>
+        } else {
+        $ac = floor(rand() * 10000);
+    }
+} else {
+    $ac = floor(rand() * 10000);
+}
+?>
 <script>
     $(document).ready(function () {
-        replyId = $('#comment-'+"<?php echo $ac; ?>");
+        replyId = $('#comment-'+"<?php echo $ac;?>");
         replyName =  replyId.find('.name:first > a').text();
         replyCon =  replyId.find('.userBB-Content:first > p').text();
-        if (replyId !== ''){
+        if (replyCon !== ''){
             $('.replyId').fadeIn();
             $('.reply-name').text(replyName);
             $('.replyCon').text('" '+replyCon+' "');
-        }else {
-            $('.replyId').css({
-                display : 'none'
-            })
+        } else {
+            $('.replyId').css('display','none');
         }
     });
 </script>
@@ -56,7 +59,7 @@ if(is_array($_GET)&&count($_GET)>0)
             </div>
         </form>
         <?php else: ?>
-            <h3><?php _e('评论已关闭'); ?></h3>
+            <div class="pageHead"><h3><?php _e('评论已关闭'); ?></h3></div>
         <?php endif; ?> <!-- 判断是否允许评论 -->
     </div>
     <div class="comments">
